@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Related articles module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function an_related_articles_theme() {
+  return [
+    'an_related_articles_template' => [
+      'variables' => ['articles' => []],
+      'template' => 'block--an-related-articles',
+    ],
+  ];
+}

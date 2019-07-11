@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Twig file for related article blocks.
+ */
+#}
+<div class="col-sm-3 ws-custom--block">
+  {% if articles is not empty %}
+    <div class="article-wrapper">
+      <ul>
+        {% for article in articles %}
+          <li><a href="/node/{{ article.nid }}">{{ article.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</div>
