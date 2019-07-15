@@ -9,7 +9,7 @@
     <div class="article-wrapper">
       <ul>
         {% for article in articles %}
-          <li><a href="/node/{{ article.nid }}">{{ article.title }}</a></li>
+          <li><a href="{{ article.alias }}">{{ article.title }}</a></li>
         {% endfor %}
       </ul>
     </div>

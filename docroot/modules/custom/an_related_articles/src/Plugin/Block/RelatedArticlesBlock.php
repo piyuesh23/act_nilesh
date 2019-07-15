@@ -26,14 +26,14 @@ class RelatedArticlesBlock extends BlockBase implements BlockPluginInterface, Co
    *
    * @var \Drupal\Core\Routing\RouteMatchInterface
    */
-  protected $routematch;
+  protected $routeMatch;
 
   /**
    * The related article service.
    *
    * @var \Drupal\an_related_articles\RelatedArticleService
    */
-  protected $articleservice;
+  protected $articleService;
 
   /**
    * RelatedArticlesBlock constructor.
@@ -51,8 +51,8 @@ class RelatedArticlesBlock extends BlockBase implements BlockPluginInterface, Co
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, RouteMatchInterface $route_match, RelatedArticleService $article_service) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->routematch = $route_match;
-    $this->articleservice = $article_service;
+    $this->routeMatch = $route_match;
+    $this->articleService = $article_service;
   }
 
   /**
@@ -75,15 +75,15 @@ class RelatedArticlesBlock extends BlockBase implements BlockPluginInterface, Co
 
     $articles = [];
 
-    if (!empty($this->routematch)) {
-      $node = $this->routematch->getParameter('node');
+    if (!empty($this->routeMatch)) {
+      $node = $this->routeMatch->getParameter('node');
     }
 
     // Check if node object is instance of node iterface or not.
     if (isset($node) && $node instanceof NodeInterface) {
 
       // Get related nodes through services.
-      $articles = $this->articleservice->getArticlesData($node);
+      $articles = $this->articleService->getArticlesData($node);
     }
 
     // Build block content.

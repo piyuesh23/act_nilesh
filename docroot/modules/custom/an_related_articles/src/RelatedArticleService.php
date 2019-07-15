@@ -3,6 +3,7 @@
 namespace Drupal\an_related_articles;
 
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Path\AliasManagerInterface;
 
 /**
  * Provides a service that provides realted artilces.
@@ -17,10 +18,23 @@ class RelatedArticleService {
   protected $database;
 
   /**
-   * Constructs a new RelatedArticleService object.
+   * The alias manager.
+   *
+   * @var \Drupal\Core\Path\AliasManagerInterface
    */
-  public function __construct(Connection $connection) {
+  protected $aliasManager;
+
+  /**
+   * Constructs a new RelatedArticleService object.
+   *
+   * @param \Drupal\Core\Database\Connection $connection
+   *   Route match.
+   * @param \Drupal\Core\Path\AliasManagerInterface $alias_manager
+   *   Article servce.
+   */
+  public function __construct(Connection $connection, AliasManagerInterface $alias_manager) {
     $this->database = $connection;
+    $this->aliasManager = $alias_manager;
   }
 
   /**
@@ -53,7 +67,7 @@ class RelatedArticleService {
 
     // Sorting criteria.
     // Same category by same author first.
-    // Ssame category by different author next.
+    // Same category by different author next.
     // Different category by same author next.
     // Different category by different author next.
     $query->addExpression('CASE 
@@ -70,6 +84,10 @@ class RelatedArticleService {
     foreach ($results as $key => $result) {
       $articles[$key]['nid'] = $result->nid;
       $articles[$key]['title'] = $result->title;
+
+      // Get node alias.
+      $alias = $this->aliasManager->getAliasByPath('/node/' . $result->nid);
+      $articles[$key]['alias'] = $alias;
     }
 
     return $articles;
