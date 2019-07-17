@@ -1,0 +1,36 @@
+uuid: 29836c1a-5990-49bb-b947-d68c0be83b0f
+langcode: en
+status: true
+dependencies:
+  module:
+    - an_related_articles
+    - ctools
+    - node
+  theme:
+    - bartik
+id: relatedarticles
+theme: bartik
+region: content
+weight: 0
+provider: null
+plugin: an_related_articles_block
+settings:
+  id: an_related_articles_block
+  label: 'Related Articles'
+  provider: an_related_articles
+  label_display: visible
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      article: article
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  node_type:
+    id: node_type
+    bundles:
+      article: article
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

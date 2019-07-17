@@ -1,0 +1,5 @@
+name: Related Articles
+type: module
+description: 'Custom block plugin to render related articles blocks.'
+package: Custom
+core: '8.x'
