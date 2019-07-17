@@ -90,7 +90,10 @@ class RelatedArticlesBlock extends BlockBase implements BlockPluginInterface, Co
     return [
       '#theme' => 'an_related_articles_template',
       '#articles' => $articles,
-      '#cache' => ['contexts' => ['url.path']],
+      '#cache' => [
+        'tags' => ['node_list'],
+        'contexts' => ['url.path'],
+      ],
     ];
   }
 
